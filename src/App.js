@@ -6,9 +6,10 @@ class App extends Component {
   state = {
     persons: [
       { id: '1', name: 'Karan', age: '26' },
-      { id: '2', name: 'Kanwal', age: '26' }
+      { id: '2', name: 'Kanwal', age: '26' },
+      { id: '3', name: 'Raghav', age: '28' }
     ],
-    showContent: true
+    showContent: false
   };
 
   changeNameHandler = (newName) => {
@@ -25,7 +26,7 @@ class App extends Component {
       return p.id === id;
     });
 
-    const person = {...this.state.persons[personIndex]};
+    const person = { ...this.state.persons[personIndex] };
 
     person.name = event.target.value;
 
@@ -55,6 +56,16 @@ class App extends Component {
 
   render() {
     let persons = null;
+    const style = {
+      backgroundColor: 'green',
+      color: 'white',
+      display: 'inline-block',
+      padding: '8px',
+      textAlign: 'center',
+      margin: '16px',
+      border: '1px solid black',
+      cursor: 'pointer'
+    }
 
     if (this.state.showContent) {
       persons = (
@@ -69,13 +80,27 @@ class App extends Component {
           })}
         </div>
       );
+
+      style.backgroundColor = 'red';
+    }
+
+    const styleClasses = [];
+    if (this.state.persons.length <= 2) {
+      styleClasses.push('red');
+    }
+
+    if (this.state.persons.length <= 1) {
+      styleClasses.push('bold');
     }
 
     return (
       <div className="App">
-        <h2>React App</h2>
-        {persons}
-        <button onClick={this.toggleContent}>Change Name</button>
+        <h1>React App</h1>
+        <p className={styleClasses.join(' ')}>Guest List</p>
+        <button 
+        style={style}
+        onClick={this.toggleContent}>Toggle Names</button>
+        {persons} 
       </div>
     );
   }

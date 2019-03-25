@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import './App.css';
-import Person from './Person/Person'
+import classes from './App.css';
+import Persons from '../components/Persons/Persons';
+import Cockpit from '../components/Cockpit/Cockpit';
 
 class App extends Component {
   state = {
@@ -56,50 +57,20 @@ class App extends Component {
 
   render() {
     let persons = null;
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      display: 'inline-block',
-      padding: '8px',
-      textAlign: 'center',
-      margin: '16px',
-      border: '1px solid black',
-      cursor: 'pointer'
-    }
 
     if (this.state.showContent) {
-      persons = (
-        <div>
-          {this.state.persons.map((person, personIndex) => {
-            return <Person
-              key={person.id}
-              name={person.name}
-              age={person.age}
-              change={(event) => this.inputNameHandler(event, person.id)}
-              click={() => this.deleteContent(personIndex)} />
-          })}
-        </div>
-      );
-
-      style.backgroundColor = 'red';
-    }
-
-    const styleClasses = [];
-    if (this.state.persons.length <= 2) {
-      styleClasses.push('red');
-    }
-
-    if (this.state.persons.length <= 1) {
-      styleClasses.push('bold');
+      persons = <Persons 
+            persons={this.state.persons}
+            changed={this.inputNameHandler}
+            clicked={this.deleteContent} />   
     }
 
     return (
-      <div className="App">
-          <h1>React App</h1>
-          <p className={styleClasses.join(' ')}>Guest List</p>
-          <button
-            style={style}
-            onClick={this.toggleContent}>Toggle Names</button>
+      <div className={classes.App}>
+          <Cockpit 
+          showContent={this.state.showContent}
+          persons={this.state.persons}
+          clicked={this.toggleContent}/>
           {persons}
         </div>
     );

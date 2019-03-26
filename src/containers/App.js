@@ -55,6 +55,19 @@ class App extends Component {
     });
   }
 
+  componentDidMount() {
+    console.log('App.js componentDidMount');
+  }
+
+  componentDidUpdate() {
+    console.log('App.js componentDidUpdate');
+  }
+
+  shouldComponentUpdate() {
+    console.log('App.js shouldComponentUpdate');
+    return true;
+  }
+
   render() {
     let persons = null;
 

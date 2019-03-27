@@ -59,34 +59,38 @@ class App extends Component {
     console.log('App.js componentDidMount');
   }
 
+  shouldComponentUpdate() {
+    console.log('App.js shouldComponentUpdate');
+    return true;
+  }
+
   componentDidUpdate() {
     console.log('App.js componentDidUpdate');
   }
 
-  shouldComponentUpdate() {
-    console.log('App.js shouldComponentUpdate');
-    return true;
+  componentWillUnmount() {
+    console.log('App.js componentWillUnmount');
   }
 
   render() {
     let persons = null;
 
     if (this.state.showContent) {
-      persons = <Persons 
-            persons={this.state.persons}
-            changed={this.inputNameHandler}
-            clicked={this.deleteContent} />   
+      persons = <Persons
+        persons={this.state.persons}
+        changed={this.inputNameHandler}
+        clicked={this.deleteContent} />
     }
 
     return (
       <div className={classes.App}>
-          <Cockpit 
+        <Cockpit
           title={this.props.appTitle}
           showContent={this.state.showContent}
-          persons={this.state.persons}
-          clicked={this.toggleContent}/>
-          {persons}
-        </div>
+          personsLength={this.state.persons.length}
+          clicked={this.toggleContent} />
+        {persons}
+      </div>
     );
   }
 

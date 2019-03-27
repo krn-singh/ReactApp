@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import classes from './App.css';
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import AuthContext from '../context/auth-context';
 
 class App extends Component {
   state = {
@@ -11,7 +12,8 @@ class App extends Component {
       { id: '3', name: 'Raghav', age: 28 }
     ],
     showContent: false,
-    editCounter: 0
+    editCounter: 0,
+    authentication: false
   };
 
   changeNameHandler = (newName) => {
@@ -59,6 +61,14 @@ class App extends Component {
     });
   }
 
+  loginHandler = () => {
+    this.setState((prevState, props) => {
+      return {
+        authentication: !prevState.authentication
+      }
+    });
+  }
+
   componentDidMount() {
     console.log('App.js componentDidMount');
   }
@@ -88,12 +98,19 @@ class App extends Component {
 
     return (
       <div className={classes.App}>
-        <Cockpit
-          title={this.props.appTitle}
-          showContent={this.state.showContent}
-          personsLength={this.state.persons.length}
-          clicked={this.toggleContent} />
-        {persons}
+        <AuthContext.Provider
+          value={{
+            authentication: this.state.authentication,
+            login: this.loginHandler
+          }}>
+          <Cockpit
+            title={this.props.appTitle}
+            showContent={this.state.showContent}
+            personsLength={this.state.persons.length}
+            clicked={this.toggleContent} />
+          {persons}
+        </AuthContext.Provider>
+
       </div>
     );
   }

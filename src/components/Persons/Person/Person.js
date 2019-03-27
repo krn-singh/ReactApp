@@ -3,6 +3,7 @@ import classes from './Person.css';
 import Aux from './../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
 import PropTypes from 'prop-types';
+import AuthContext from '../../../context/auth-context';
 
 const person = (props) => {
     const inputElement = useRef(null);
@@ -13,6 +14,9 @@ const person = (props) => {
 
     return (
         <Aux>
+            <AuthContext.Consumer>
+                {(context) => context.authentication ? <p>Authenticated</p> : <p>Please log in</p>}
+            </AuthContext.Consumer>
             <p onClick={props.click}>Person name: {props.name} and age: {props.age}</p>
             <p>{props.children}</p>
             <input 

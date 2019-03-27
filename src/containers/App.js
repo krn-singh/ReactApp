@@ -10,7 +10,8 @@ class App extends Component {
       { id: '2', name: 'Kanwal', age: '26' },
       { id: '3', name: 'Raghav', age: '28' }
     ],
-    showContent: false
+    showContent: false,
+    editCounter: 0
   };
 
   changeNameHandler = (newName) => {
@@ -35,8 +36,11 @@ class App extends Component {
 
     persons[personIndex] = person;
 
-    this.setState({
-      persons: persons
+    this.setState((prevState, props) => {
+      return {
+        persons: persons,
+        editCounter: prevState.editCounter + 1
+      }
     });
   }
 

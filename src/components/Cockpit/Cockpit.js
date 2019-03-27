@@ -4,9 +4,9 @@ import classes from './Cockpit.css';
 const cockpit = (props) => {
     useEffect(() => {
         console.log('Cockpit.js useEffect');
-        setTimeout(() => {
-            alert('Timeout');
-        }, 1000);
+        // setTimeout(() => {
+        //     alert('Timeout');
+        // }, 1000);
     },[props.personsLength]);
 
     const styleClasses = [];

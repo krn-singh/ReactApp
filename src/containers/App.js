@@ -6,9 +6,9 @@ import Cockpit from '../components/Cockpit/Cockpit';
 class App extends Component {
   state = {
     persons: [
-      { id: '1', name: 'Karan', age: '26' },
-      { id: '2', name: 'Kanwal', age: '26' },
-      { id: '3', name: 'Raghav', age: '28' }
+      { id: '1', name: 'Karan', age: 26 },
+      { id: '2', name: 'Kanwal', age: 26 },
+      { id: '3', name: 'Raghav', age: 28 }
     ],
     showContent: false,
     editCounter: 0

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import classes from './Person.css';
 import Aux from './../../../hoc/Aux';
 import withClass from '../../../hoc/withClass';
@@ -7,24 +7,23 @@ import AuthContext from '../../../context/auth-context';
 
 const person = (props) => {
     const inputElement = useRef(null);
-    
+    const authContext = useContext(AuthContext);
+
     useEffect(() => {
         inputElement.current.focus();
     });
 
     return (
         <Aux>
-            <AuthContext.Consumer>
-                {(context) => context.authentication ? <p>Authenticated</p> : <p>Please log in</p>}
-            </AuthContext.Consumer>
+            {authContext.authentication ? <p>Authenticated</p> : <p>Please log in</p>}
             <p onClick={props.click}>Person name: {props.name} and age: {props.age}</p>
             <p>{props.children}</p>
-            <input 
-            type="text" 
-            ref={inputElement}
-            onChange={props.change}
-            value ={props.name}/>
-        </Aux>       
+            <input
+                type="text"
+                ref={inputElement}
+                onChange={props.change}
+                value={props.name} />
+        </Aux>
     );
 }
 
